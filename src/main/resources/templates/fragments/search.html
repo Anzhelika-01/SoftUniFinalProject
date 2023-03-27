@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<nav class="tm-nav" id="tm-nav">
+
+    <th:block sec:authorize="!isAuthenticated()">
+    <a th:href="@{register}">
+        <button class="register">Register</button>
+    </a>
+    </th:block>
+
+    <th:block sec:authorize="!isAuthenticated()">
+    <a th:href="@{login}">
+        <button class="login">Login</button>
+    </a>
+    </th:block>
+
+    <th:block sec:authorize="isAuthenticated()">
+    <a th:href="@{index}">
+        <button class="logout">Logout</button>
+    </a>
+    </th:block>
+
+    <a th:href="@{calorie-calculator}">
+        <button class="calculator">Calorie Calculator</button>
+    </a>
+
+</nav>
+
+<div class="row tm-row">
+    <div class="col-12">
+        <form th:method="GET" class="form-inline tm-mb-80 tm-search-form">
+            <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..."
+                   aria-label="Search">
+            <button class="tm-search-button" type="submit">
+                <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
+</div>

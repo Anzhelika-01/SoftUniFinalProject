@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/head}">
+</head>
+
+<body>
+<header th:replace="~{/fragments/navigation}">
+</header>
+
+<div class="container-fluid">
+    <main class="tm-main">
+
+        <div th:replace="~{/fragments/search}">
+        </div>
+
+        <div class="row tm-row tm-mb-45">
+            <div class="col-12">
+                <hr class="tm-hr-primary tm-mb-55">
+            </div>
+        </div>
+
+        <div class="row tm-row tm-mb-120">
+            <div class="col-12">
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Make a post</h2>
+            </div>
+            <div class="col-lg-7 tm-contact-left">
+                <form th:action="@{/make-post}"
+                      th:method="POST"
+                      th:object="${postForm}"
+
+                      class="mb-5 ml-auto mr-0 tm-contact-form">
+
+<!--                    <div>-->
+<!--                        <label for="image">Upload Photo: </label>-->
+<!--                        <input type="file" id="image" name="image">-->
+<!--                    </div>-->
+
+                    <label for="category">Category: </label>
+                    <select id="category" name="category" type="category"
+                            th:value="*{category}" required>
+                        <option value="HEALTHY_FOOD">Healthy food</option>
+                        <option value="HOME_WORKOUTS">Home workouts</option>
+                        <option value="FITNESS_WORKOUTS">Workouts in fitness</option>
+
+                        <p th:if="${#fields.hasErrors('category')}"
+                           class="errors alert alert-danger">
+                            Category is required.
+                        </p>
+
+                    </select>
+
+                    <div class="form-group row mb-5">
+                        <label for="text" class="col-sm-3 col-form-label text-right tm-color-primary">Post</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control mr-0 ml-auto" name="text" id="text" rows="8"
+                                      placeholder="Type something..."
+                                      th:value="*{text}" required></textarea>
+                        </div>
+
+                        <p th:if="${#fields.hasErrors('text')}"
+                           class="errors alert alert-danger">
+                            Text is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group row text-right">
+                        <div class="col-12">
+                            <button class="tm-btn tm-btn-primary tm-btn-small">Post</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer th:replace="~{/fragments/footer}">
+        </footer>
+
+    </main>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/templatemo-script.js}"></script>
+
+</body>
+</html>
